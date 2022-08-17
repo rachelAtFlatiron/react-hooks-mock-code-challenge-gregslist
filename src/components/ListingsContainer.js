@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ListingCard from "./ListingCard";
 
 function ListingsContainer({ listings, deleteListing }) {
-  
+  //listings = [{listing}, {listing}, {listing}]
+  //.map listings = [<ListingCard listing={el}/>, <ListingCard listing={el} />, <ListingCard listing={el}/>]
   return (
     <main>
 

@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 
 function ListingCard({ listing, deleteListing }) {
+
+  /*
+    listing = {
+      image: '???',
+      description: '???',
+      location: '???'
+    }
+  */
+
   const [fave, setFave] = useState(false)
 
   const handleClick = function(){

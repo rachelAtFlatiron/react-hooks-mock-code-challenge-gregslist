@@ -1,12 +1,6 @@
 {
   "listings": [
     {
-      "id": 1,
-      "description": "heater",
-      "image": "./images/heater.jpg",
-      "location": "BROOKLYN"
-    },
-    {
       "id": 3,
       "description": "Free Braun 3735 Electric Toothbrush charger",
       "image": "./images/toothbrush-charger.jpg",
@@ -23,12 +17,6 @@
       "description": "wood",
       "image": "./images/wood.jpg",
       "location": "Greenpoint"
-    },
-    {
-      "id": 6,
-      "description": "Beautiful couch",
-      "image": "./images/couch.jpg",
-      "location": "Bay Ridge"
     },
     {
       "id": 7,
