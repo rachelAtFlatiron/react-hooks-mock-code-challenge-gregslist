@@ -9,11 +9,13 @@ function App() {
   const [ search, setSearch ] = useState('')
   const [ listings, setListings ] = useState([])
   const [ formListing, setFormListing ] = useState({...newListing})
+  const [displayedListings, setDisplayedListings] = useState([])
 
   const getListings = async function(){
     let res = await fetch(url)
     let data = await res.json()
     setListings(data)
+    setDisplayedListings(data)
   }
 
   const deleteListing = async function(id){
@@ -31,6 +33,11 @@ function App() {
     setListings([...listings, data])
   }
 
+  const submitSearch = function(e){
+    e.preventDefault();
+    setDisplayedListings(listings.filter(el => el.description.toLowerCase().includes(search.toLowerCase())))
+  }
+
   const changeSearch = function(e){
     setSearch(e.target.value)
   }
@@ -40,10 +47,9 @@ function App() {
   }
 
   useEffect(() => getListings(), [])
-  const displayedListings = listings.filter(el => el.description.toLowerCase().includes(search.toLowerCase()))
   return (
     <div className="app">
-      <Header search={search} changeSearch={changeSearch} />
+      <Header search={search} changeSearch={changeSearch} submitSearch={submitSearch} />
       <ListingForm formListing={formListing} handleChange={changeNewListing} handleSubmit={addListing} />
       <ListingsContainer listings={displayedListings} deleteListing={deleteListing} />
     </div>
