@@ -1,9 +1,25 @@
-import React from "react";
+import { useState } from "react";
 
-function Search() {
+/*
+CONTROLLED FORM
+1. state
+2. form's value
+3. onchange
+*/
+
+function Search({ updateSearch }) {
+
+  //handle form values / update user onChanges
+  const [ form, setForm ] = useState('')
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    //set state in App.js / handle user submit
+    updateSearch(form)
+  }
+
+  function handleChange(e){
+    setForm(e.target.value)
   }
 
   return (
@@ -12,8 +28,8 @@ function Search() {
         type="text"
         id="search"
         placeholder="search free stuff"
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
+        value={form}
+        onChange={(e) => handleChange(e)}
       />
       <button type="submit">🔍</button>
     </form>

@@ -19,12 +19,6 @@
       "location": "Williamsburg"
     },
     {
-      "id": 4,
-      "description": "FREE Hundreds of DVD/CD Cases - Different Sizes and Colors",
-      "image": "./images/dvd-cases.jpg",
-      "location": "Prospect Heights"
-    },
-    {
       "id": 5,
       "description": "wood",
       "image": "./images/wood.jpg",
@@ -41,6 +35,12 @@
       "description": "Treadmill Parts For Free",
       "image": "./images/treadmill.jpg",
       "location": "East Flatbush"
+    },
+    {
+      "location": "school",
+      "description": "magic ",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkm9PzNzGfffCEMXFNSxCG-S2TyeDTp3idz981oplprc21wBSUP-x6ik3CVsu7knzgmnXOaYOTb0I&usqp=CAU&ec=48665699",
+      "id": 8
     }
   ]
 }
