@@ -9,10 +9,12 @@ state -> view -> event -> state -> ...
 3. create an onChange handler to update state (event)
 
 */
-function Search({ updateSearch }) {
+function Search({ updateSearch, updateSort }) {
 
+  //note sort is a string value, will have to convert to boolean (we are doing this App)
   const initialForm = {
-    search: ''
+    search: '',
+    sort: "true"
   }
 
   const [form, setForm] = useState(initialForm)
@@ -20,6 +22,7 @@ function Search({ updateSearch }) {
   function handleSubmit(e) {
     e.preventDefault();
     updateSearch(form.search)
+    updateSort(form.sort)
     setForm(initialForm)
   }
 
@@ -40,6 +43,10 @@ function Search({ updateSearch }) {
         value={form.search}
         onChange={(e) => handleChange(e)}
       />
+      <select name="sort" value={form.sort} onChange={(e) => handleChange(e)}>
+        <option value="true">A-Z</option>
+        <option value="false">Z-A</option>
+      </select>
       <button type="submit">🔍</button>
     </form>
   );

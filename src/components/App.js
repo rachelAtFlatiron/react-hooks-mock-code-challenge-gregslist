@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
-
+import ListingForm from "./ListingForm";
 /* Deliverable #1
 
 1. created state and used fetch/useEffect to populate state with data
@@ -41,15 +41,81 @@ state -> view -> event -> state -> ...
 */
 function App() {
   const [search, setSearch] = useState('')
-
+  //false for z-a, true for a-z
+  const [sort, setSort] = useState(true)
+  const [listings, setListings] = useState([])
   // const updateSearch = (value) => {
   //   setSearch(value)
   // }
 
+  const updateSort = (value) => {
+    //deal with conversion from string to bool 
+    if(value === "true"){
+      setSort(true)
+    } else {
+      setSort(false)
+    }
+  }
+
+  useEffect(() => {
+    fetch(`http://localhost:6001/listings`)
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      } else {
+        console.error('oh no')
+      }
+    })
+    .then(data => setListings(data))
+  }, [])
+
+  const filteredListings = listings.filter(item => {
+    //convert everything to lowercase
+    //ask if search is in item description 
+    const lowerSearch = search.toLowerCase()
+    const lowerItem = item.description.toLowerCase()
+    if(lowerItem.includes(lowerSearch)){
+      return true
+    } else {
+      return false
+    }
+    //return item.description.toLowerCase().includes(search.toLowerCase())
+  })
+
+  const sortedListings = filteredListings.sort((curItem, nextItem) => {
+    if(sort){ //A-Z
+      return curItem.location.localeCompare(nextItem.location)
+    } else { //Z-A
+      return nextItem.location.localeCompare(curItem.location)
+    }
+  })
+
+
+
+  const deleteItem = (id) => {
+    //filter item out of state 
+    setListings(listings.filter(item => {
+      //if current item does not have matching id
+      //keep current item
+      if(item.id !== id){
+        return true 
+      } else {
+        return false
+      }
+      //return item.id !== id
+    }))
+  }
+
+  const addItem = (newItem) => {
+    setListings([...listings, newItem])
+  }
+  
+
   return (
     <div className="app">
-      <Header updateSearch={(value) => {setSearch(value)}} />
-      <ListingsContainer search={search} />
+      <Header updateSearch={(value) => {setSearch(value)}}  updateSort={updateSort}/>
+      <ListingForm addItem={addItem} />
+      <ListingsContainer listings={sortedListings} deleteItem={deleteItem}/>
     </div>
   );
 }
